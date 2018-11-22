@@ -1,0 +1,162 @@
+<%-- <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %> --%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<!DOCTYPE html>
+<html
+	class="app js no-touch no-android no-chrome firefox no-iemobile no-ie no-ie10 no-ios">
+<head>
+<title>Medi-Track | Admin</title>
+
+<link rel="stylesheet" href="css/app.css" type="text/css" />
+<link rel="stylesheet" href="css/font.css" type="text/css" cache="false" />
+<link rel="stylesheet" href="DataTables/datatables.min.css"
+	type="text/css" />
+
+<style>
+.error {
+	font-size: 18px;
+	color: #b94a48;
+	text-align: center;
+	margin-top: 0px;
+	margin-bottom: -20px;
+}
+</style>
+
+</head>
+
+<body>
+
+	<section class="vbox">
+		<header class="bg-dark dk header navbar navbar-fixed-top-xs">
+			<div class="navbar-header aside-md">
+				<a class="btn btn-link visible-xs"
+					data-toggle="class:nav-off-screen" data-target="#nav"> <i
+					class="fa fa-bars"></i>
+				</a> <a href="#" class="navbar-brand" data-toggle="fullscreen">Medi-Track</a>
+				<a class="btn btn-link visible-xs" data-toggle="dropdown"
+					data-target=".nav-user"> <i class="fa fa-cog"></i>
+				</a>
+			</div>
+
+			<ul class="nav navbar-nav navbar-right hidden-xs nav-user">
+				<!-- <li class="hidden-xs"><a href="#" class="dropdown-toggle dk"
+					data-toggle="dropdown"> <i class="fa fa-bell"></i> <span
+						class="badge badge-sm up bg-danger m-l-n-sm count">2</span>
+				</a>
+					<section class="dropdown-menu aside-xl">
+						<section class="panel bg-white">
+							<header class="panel-heading b-light bg-light">
+								<strong>You have <span class="count">2</span>
+									notifications
+								</strong>
+							</header>
+							<div class="list-group list-group-alt animated fadeInRight">
+								<a href="#" class="media list-group-item"> <span
+									class="pull-left thumb-sm"> <img src="images/avatar.jpg"
+										alt="John said" class="img-circle">
+								</span> <span class="media-body block m-b-none"> Use awesome
+										animate.css<br> <small class="text-muted">10
+											minutes ago </small>
+								</span>
+								</a> <a href="#" class="media list-group-item"> <span
+									class="media-body block m-b-none"> 1.0 initial released<br>
+										<small class="text-muted">1 hour ago </small>
+								</span>
+								</a>
+							</div>
+							<footer class="panel-footer text-sm">
+								<a href="#" class="pull-right"><i class="fa fa-cog"></i></a> <a
+									href="#notes" data-toggle="class:show animated fadeInRight">See
+									all the notifications</a>
+							</footer>
+						</section>
+					</section></li>
+				<li class="dropdown hidden-xs"><a href="#"
+					class="dropdown-toggle dker" data-toggle="dropdown"><i
+						class="fa fa-fw fa-search"></i></a>
+					<section class="dropdown-menu aside-xl animated fadeInUp">
+						<section class="panel bg-white">
+							<form role="search">
+								<div class="form-group wrapper m-b-none">
+									<div class="input-group">
+										<input type="text" class="form-control" placeholder="Search">
+										<span class="input-group-btn">
+											<button type="submit" class="btn btn-info btn-icon">
+												<i class="fa fa-search"></i>
+											</button>
+										</span>
+									</div>
+								</div>
+							</form>
+						</section>
+					</section>
+				</li> -->
+				<li class="dropdown"><a href="#" class="dropdown-toggle"
+					data-toggle="dropdown"> <span class="thumb-sm pull-left">
+					</span><strong> <c:out value="${sessionScope.sessionName}" />
+					</strong> <b class="caret"></b>
+				</a>
+					<ul class="dropdown-menu animated fadeInRight">
+						<span class="arrow top"></span>
+						<li><a href="#" data-toggle="modal" data-target="#myModal">Change
+								password </a></li>
+
+						<li class="divider"></li>
+						<li><a href="/admin/logout">Logout</a></li>
+					</ul></li>
+			</ul>
+		</header>
+		<div id="myModal" class="modal fade" role="dialog">
+			<div class="modal-dialog">
+
+				<!-- Modal content-->
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal">&times;</button>
+						<h4 class="modal-title">Change password</h4>
+					</div>
+					<form class="form-horizontal" action="/admin/chnagepassword"
+						method="post">
+						<div class="modal-body">
+
+							<div class="form-group">
+								<label class="col-sm-2 control-label">Current Password</label>
+
+								<div class="col-sm-10">
+									<input type="text" id="currentpassword" name="currentpassword"
+										class="form-control" placeholder="Current Password" required>
+								</div>
+							</div>
+
+							<div class="form-group">
+								<label class="col-sm-2 control-label">New Password</label>
+
+								<div class="col-sm-10">
+									<input type="text" id="newpassword" name="newpassword"
+										class="form-control" placeholder="New Password" required>
+								</div>
+							</div>
+
+							<div class="form-group">
+								<label class="col-sm-2 control-label">Confirm Password</label>
+
+								<div class="col-sm-10">
+									<input type="text" id="confirmpassword" name="confirmpassword"
+										class="form-control" placeholder="Confirm Password" required>
+								</div>
+							</div>
+
+							<c:if test="${not empty errorMessage}">
+								<p class="error">${errorMessage}</p>
+							</c:if>
+						</div>
+						<div class="modal-footer">
+							<button type="submit" class="btn btn-primary">Save
+								changes</button>
+							<button type="button" class="btn btn-default"
+								data-dismiss="modal">Close</button>
+						</div>
+					</form>
+				</div>
+
+			</div>
+		</div>
